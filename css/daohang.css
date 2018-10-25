@@ -1,0 +1,28 @@
+.website-link {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-left: 25px;
+}
+
+.pdf-link,
+.pdf-link:hover,
+.pdf-link:visited,
+.pdf-link:active,
+.pdf-link:link {
+    text-decoration: none;
+}
+
+.pdf-link .card {
+    height: 170px;
+}
+
+.engine-select {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.engine-select:focus {
+    outline: 0;
+    border: 1px solid #ced4da;
+    box-shadow: 0 0 0 0 rgba(128, 189, 255, .5);
+}
