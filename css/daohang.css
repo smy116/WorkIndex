@@ -26,3 +26,9 @@
     border: 1px solid #ced4da;
     box-shadow: 0 0 0 0 rgba(128, 189, 255, .5);
 }
+
+@media (min-width: 768px) {
+    .search-box {
+        width: 500px!important;
+    }
+}
