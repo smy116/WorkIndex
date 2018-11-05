@@ -19,10 +19,15 @@ $("#express-form").submit(function(e) {
 });
 
 
+
 $("#search-form").submit(function(e) {
 
-    if ($("input[name='keyword']").val() == "") {
-        return false;
-    }
+
+    var keyword = $.base64.encode($("#keyword").val())
+    var engine = $("#engine-name").val()
+
+    window.open("search.html?keyword=" + keyword + "&engine=" + engine);
+
+    return false;
 
 });

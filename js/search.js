@@ -1,6 +1,6 @@
   $(document).ready(function() {
-      $("input[name='keyword']").val(getUrlParam('keyword'))
-      $("input[name='engine']").val(getUrlParam('engine'))
+      $("input[name='keyword']").val($.base64.decode(getUrlParam("keyword")))
+      $("input[name='engine']").val(getUrlParam("engine"))
       resetIframe()
   });
 
@@ -16,13 +16,6 @@
       "iwencai": "https://www.iwencai.com/data-robot/extract-new?querytype=stock&dataSource=send_click&w=",
   };
 
-  //Url参数解析
-  function getUrlParam(name) {
-      var url = window.location.search;
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var result = url.substr(1).match(reg);
-      return result ? decodeURIComponent(result[2]) : null;
-  }
 
   //刷新iframe框架
   function resetIframe() {
@@ -44,5 +37,26 @@
 
   $("a[name='engineSelect']").click(function() {
       $("input[name='engine']").val($(this).attr("engine"))
-      $("form").submit()
+
+      var engine = $("input[name='engine']").val()
+      var keyword = $.base64.encode($("input[name='keyword']").val())
+      window.location.href = "search.html?keyword=" + keyword + "&engine=" + engine
   });
+
+  $("#search-form").submit(function(e) {
+      $("input[name='engine']").val($(this).attr("engine"))
+
+      var engine = $("input[name='engine']").val()
+      var keyword = $.base64.encode($("input[name='keyword']").val())
+      window.location.href = "search.html?keyword=" + keyword + "&engine=" + engine
+      return false;
+
+  });
+
+  //Url参数解析
+  function getUrlParam(name) {
+      var url = window.location.search;
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var result = url.substr(1).match(reg);
+      return result ? decodeURIComponent(result[2]) : null;
+  }
