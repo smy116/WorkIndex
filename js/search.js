@@ -44,9 +44,8 @@
   });
 
   $("#search-form").submit(function(e) {
-      $("input[name='engine']").val($(this).attr("engine"))
 
-      var engine = $("input[name='engine']").val()
+      var engine = getUrlParam("engine")
       var keyword = $.base64.encode($("input[name='keyword']").val())
       window.location.href = "search.html?keyword=" + keyword + "&engine=" + engine
       return false;
