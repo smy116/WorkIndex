@@ -11,7 +11,7 @@
       "bing": "https://cn.bing.com/search?form=QBLH&filt=all&q=",
       "qichacha": "https://www.qichacha.com/search?key=",
       "openlaw": "http://openlaw.cn/search/judgement/default?keyword=",
-      "cninfo": "http://www.cninfo.com.cn/cninfo-new/fulltextSearch?code=&notautosubmit=&keyWord=",
+      "cninfo": "http://www.cninfo.com.cn/new/fulltextSearch?keyWord=",
       "kuaidihelp": "https://m.kuaidihelp.com/express/queryResult?word=",
       "iwencai": "https://www.iwencai.com/data-robot/extract-new?querytype=stock&dataSource=send_click&w=",
   };
