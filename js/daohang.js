@@ -1,3 +1,13 @@
+
+$(document).ready(function(){
+    //获取搜索引擎列表
+    for (let key in engineList) {
+        $("select[name='engine']").append("<option value='"+key+"'>"+engineList[key]["name"]+"</option>");
+    }
+});
+
+
+//提交快递查询
 $("#express-form").submit(function(e) {
     var code = $("input[name='word']").val();
 
@@ -19,10 +29,22 @@ $("#express-form").submit(function(e) {
 });
 
 
+//提交搜索
 $("#search-form").submit(function(e) {
-
-    if ($("input[name='keyword']").val() == "") {
+    var engine = $("select[name='engine']").val();
+    var keyword = encodeURIComponent($("input[name='keyword']").val());
+    
+    if (keyword == "") {
         return false;
     }
+    var url = engineList[engine]["url"] + keyword;
+    if (engineList[engine]["isNewTab"] == true){
+        window.open(url,"_blank");
+        
+    }else{
+        window.open("/search.html?keyword="+keyword+"&engine="+engine,"_blank");
+    }
+
+    return false;
 
 });

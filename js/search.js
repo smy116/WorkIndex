@@ -1,20 +1,13 @@
-  $(document).ready(function() {
-      $("input[name='keyword']").val(getUrlParam('keyword'))
-      $("input[name='engine']").val(getUrlParam('engine'))
-      resetIframe()
+  $(document).ready(function () {
+      //获取搜索引擎列表
+      for (let key in engineList) {
+          $("#engineList").append('<li class="nav-item active"><a engine="' + key + '" name="engineSelect" class="nav-link" href="#">' + engineList[key]["name"] + '</a></li>');
+      }
+
+      $("input[name='keyword']").val(getUrlParam('keyword'));
+      $("input[name='engine']").val(getUrlParam('engine'));
+      resetIframe();
   });
-
-
-  //搜索引擎
-  var engineUrl = {
-      "baidu": "https://www.baidu.com/s?ie=utf-8&wd=",
-      "bing": "https://cn.bing.com/search?form=QBLH&filt=all&q=",
-      "qichacha": "https://www.qichacha.com/search?key=",
-      "cninfo": "http://www.cninfo.com.cn/new/fulltextSearch?keyWord=",
-      "google": "https://gugeji.com/search?q=",
-      "kuaidihelp": "https://m.kuaidihelp.com/express/queryResult?word=",
-      "iwencai": "https://www.iwencai.com/search?tid=stockpick&w=",
-  };
 
   //Url参数解析
   function getUrlParam(name) {
@@ -26,23 +19,45 @@
 
   //刷新iframe框架
   function resetIframe() {
-      var keyword = $("input[name='keyword']").val()
-      var engine = $("input[name='engine']").val()
+      var keyword = encodeURIComponent($("input[name='keyword']").val());
+      var engine = $("input[name='engine']").val();
 
       if (engine == "") {
-          engine = "baidu"
+          engine = "baidu";
       }
 
       if (keyword == "") {
-          return 0
+          return false;
       }
 
-      var searchUrl = engineUrl[engine] + keyword
-      $("#iframeDom").attr("src", searchUrl);
+      var searchUrl = engineList[engine]["url"] + keyword;
+
+      if (engineList[engine]["isNewTab"] == true) {
+          window.open(searchUrl, "_blank");
+      } else {
+          $("#iframeDom").attr("src", searchUrl);
+      }
+
+      return false;
+
 
   }
+  $("#engineList ").on("click", "a[name='engineSelect']", function () {
+      $("input[name='engine']").val($(this).attr("engine"));
+      $("#search-form").submit();
+  });
 
-  $("a[name='engineSelect']").click(function() {
-      $("input[name='engine']").val($(this).attr("engine"))
-      $("form").submit()
+
+  $("#search-form").submit(function (e) {
+      var engine = $("input[name='engine']").val();
+      var keyword = encodeURIComponent($("input[name='keyword']").val());
+
+      if (keyword == "") {
+          return false;
+      }
+
+      window.location.href = "/search.html?keyword=" + keyword + "&engine=" + engine
+
+      return false;
+
   });
