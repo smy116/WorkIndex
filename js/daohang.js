@@ -39,10 +39,10 @@ $("#search-form").submit(function(e) {
     }
     var url = engineList[engine]["url"] + keyword;
     if (engineList[engine]["isNewTab"] == true){
-        window.open(url,"_blank");
+        window.location.href = url;
         
     }else{
-        window.open("/search.html?keyword="+keyword+"&engine="+engine,"_blank");
+        window.location.href = "/search.html?keyword="+keyword+"&engine="+engine
     }
 
     return false;
