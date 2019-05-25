@@ -1,11 +1,10 @@
   $(document).ready(function () {
       //获取搜索引擎列表
       for (let key in engineList) {
-          $("#engineList").append('<li class="nav-item active"><a engine="' + key + '" name="engineSelect" class="nav-link" href="#">' + engineList[key]["name"] + '</a></li>');
+          $("#engineList").append('<li class="nav-item active"><a class="nav-link" href="/search.html?keyword='+getUrlParam('keyword')+'&engine='+ key +'">' + engineList[key]["name"] + '</a></li>');
       }
 
       $("input[name='keyword']").val(getUrlParam('keyword'));
-      $("input[name='engine']").val(getUrlParam('engine'));
       resetIframe();
   });
 
@@ -20,7 +19,7 @@
   //刷新iframe框架
   function resetIframe() {
       var keyword = encodeURIComponent($("input[name='keyword']").val());
-      var engine = $("input[name='engine']").val();
+      var engine = getUrlParam('engine');
 
       if (engine == "") {
           engine = "baidu";
@@ -42,14 +41,14 @@
 
 
   }
-  $("#engineList ").on("click", "a[name='engineSelect']", function () {
-      $("input[name='engine']").val($(this).attr("engine"));
-      $("#search-form").submit();
-  });
-
 
   $("#search-form").submit(function (e) {
-      var engine = $("input[name='engine']").val();
+      var engine = getUrlParam('engine');
+
+      if (engine == "") {
+          engine = "baidu";
+      }
+
       var keyword = encodeURIComponent($("input[name='keyword']").val());
 
       if (keyword == "") {
