@@ -19,14 +19,14 @@ var engineList = {
         url: "https://www.iwencai.com/data-robot/extract-new?qs=pc_~soniu~others~homepage~box~input&querytype=stock&dataSource=send_click&w=",
         isNewTab: false
     },
+    "map": {
+        name: "地图",
+        url: "https://map.baidu.com/search/?querytype=s&da_src=shareurl&wd=",
+        isNewTab: false
+    },
     "taobao": {
         name: "淘宝",
         url: "https://s.taobao.com/search?q=",
-        isNewTab: true
-    },
-    "jd": {
-        name: "京东",
-        url: "https://search.jd.com/Search?keyword=",
         isNewTab: true
     },
 };
