@@ -1,14 +1,14 @@
 
-$(document).ready(function(){
+$(document).ready(function () {
     //获取搜索引擎列表
     for (let key in engineList) {
-        $("select[name='engine']").append("<option value='"+key+"'>"+engineList[key]["name"]+"</option>");
+        $("select[name='engine']").append("<option value='" + key + "'>" + engineList[key]["name"] + "</option>");
     }
 });
 
 
 //提交快递查询
-$("#express-form").submit(function(e) {
+$("#express-form").submit(function (e) {
     var code = $("input[name='word']").val();
 
     if (code == "") {
@@ -30,20 +30,15 @@ $("#express-form").submit(function(e) {
 
 
 //提交搜索
-$("#search-form").submit(function(e) {
+$("#search-form").submit(function (e) {
     var engine = $("select[name='engine']").val();
     var keyword = encodeURIComponent($("input[name='keyword']").val());
-    
+
     if (keyword == "") {
         return false;
     }
     var url = engineList[engine]["url"] + keyword;
-    if (engineList[engine]["isNewTab"] == true){
-        window.open(url);
-        
-    }else{
-        window.open("/search.html?keyword="+keyword+"&engine="+engine);
-    }
+    window.open(url);
 
     return false;
 
